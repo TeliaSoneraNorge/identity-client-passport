@@ -1,0 +1,7 @@
+{
+  "extends": "airbnb-base",
+  "rules": {
+    "jsx-quotes": [2, "prefer-single"],
+    "id-length": 0,
+  },
+}
