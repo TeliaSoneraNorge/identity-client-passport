@@ -29,3 +29,4 @@ node_modules
 #Other
 .DS_Store
 dist/
+.idea
