@@ -20,7 +20,7 @@ app.use(express.static(__dirname + '/../public'));
 app.use('/vendor', express.static(__dirname + '/../vendor'));
 app.use(bodyParser.json());
 
-export const idpApiUrl = 'https://id-test.teliasonera.no/realms/telia/protocol/openid-connect';
+export const idpApiUrl = 'https://sandbox.login.telia.io/realms/telia/protocol/openid-connect';
 const users = {};
 
 passport.use(
