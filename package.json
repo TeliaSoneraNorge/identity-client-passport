@@ -25,6 +25,6 @@
     "express-session": "^1.14.2",
     "lodash": "^4.17.2",
     "passport": "^0.3.2",
-    "passport-openidconnect": "0.0.1"
+    "passport-openidconnect": "0.0.2"
   }
 }
