@@ -17,6 +17,14 @@ const clientSecret = 'AddClientSecretHere';
 const callbackURL = 'http://localhost:3000/auth/callback';  // Change this in production
 const scope = ['oidc'];
 
+if (clientID === 'AddClientIDHere' || clientSecret === 'AddClientSecretHere') {
+  console.error(`
+    [ERROR]: The clientID or clientSecret is not configured correctly.
+    Please set the variables in src/app.js with the info you got
+    from console.telia.io.
+  `);
+  process.exit(1);
+}
 
 const app = express();
 const users = {};
