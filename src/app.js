@@ -26,6 +26,7 @@ const users = {};
 passport.use(
   'provider',
   new Strategy({
+    issuer: idpApiUrl,
     authorizationURL: `${idpApiUrl}/auth`,
     tokenURL: `${idpApiUrl}/token`,
     userInfoURL: `${idpApiUrl}/userinfo`,
@@ -37,7 +38,7 @@ passport.use(
   (accessToken, refreshToken, profile, done) => {
     users[profile.preferred_username] = profile;
     done(null, profile);
-  }
+  },
 ));
 
 passport.serializeUser((user, done) => {
