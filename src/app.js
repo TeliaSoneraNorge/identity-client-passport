@@ -32,7 +32,7 @@ passport.use(
     userInfoURL: `${idpApiUrl}/userinfo`,
     clientID: 'addClientIDHere',
     clientSecret: 'AddClientSecretHere',
-    callbackURL: 'http://localhost:3000/auth/provider/callback',
+    callbackURL: 'http://localhost:3000/auth/callback',
     scope: ['AddScopeHere'],
   },
   (accessToken, refreshToken, profile, done) => {
