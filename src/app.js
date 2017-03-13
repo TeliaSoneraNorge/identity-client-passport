@@ -9,7 +9,16 @@ import session from 'express-session';
 import _ from 'lodash';
 
 
+/* ---------------- Configuration ----------------  */
+const idpApiUrl = 'https://sandbox.login.telia.io/realms/telia/protocol/openid-connect';
+const clientID = 'AddClientIDHere';
+const clientSecret = 'AddClientSecretHere';
+const callbackURL = 'AddRedirectURLHere';  // Example: http://localhost:3000/auth/callback
+const scope = ['AddScopeHere'];
+
+
 const app = express();
+const users = {};
 export default app;
 
 app.engine('html', renderFile);
@@ -20,9 +29,6 @@ app.use(express.static(`${__dirname}/../public`));
 app.use('/vendor', express.static(`${__dirname}/../vendor`));
 app.use(bodyParser.json());
 
-export const idpApiUrl = 'https://sandbox.login.telia.io/realms/telia/protocol/openid-connect';
-const users = {};
-
 passport.use(
   'provider',
   new Strategy({
@@ -30,10 +36,10 @@ passport.use(
     authorizationURL: `${idpApiUrl}/auth`,
     tokenURL: `${idpApiUrl}/token`,
     userInfoURL: `${idpApiUrl}/userinfo`,
-    clientID: 'addClientIDHere',
-    clientSecret: 'AddClientSecretHere',
-    callbackURL: 'http://localhost:3000/auth/callback',
-    scope: ['AddScopeHere'],
+    clientID,
+    clientSecret,
+    callbackURL,
+    scope,
   },
   (accessToken, refreshToken, profile, done) => {
     users[profile.preferred_username] = profile;
