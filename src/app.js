@@ -10,11 +10,12 @@ import _ from 'lodash';
 
 
 /* ---------------- Configuration ----------------  */
-const idpApiUrl = 'https://sandbox.login.telia.io/realms/telia/protocol/openid-connect';
+const issuer = 'https://login.telia.io/realms/telia';
+const idpApiUrl = `${issuer}/protocol/openid-connect`;
 const clientID = 'AddClientIDHere';
 const clientSecret = 'AddClientSecretHere';
-const callbackURL = 'AddRedirectURLHere';  // Example: http://localhost:3000/auth/callback
-const scope = ['AddScopeHere'];
+const callbackURL = 'http://localhost:3000/auth/callback';  // Change this in production
+const scope = ['oidc'];
 
 
 const app = express();
@@ -30,9 +31,9 @@ app.use('/vendor', express.static(`${__dirname}/../vendor`));
 app.use(bodyParser.json());
 
 passport.use(
-  'provider',
+  'openid-connect',
   new Strategy({
-    issuer: idpApiUrl,
+    issuer,
     authorizationURL: `${idpApiUrl}/auth`,
     tokenURL: `${idpApiUrl}/token`,
     userInfoURL: `${idpApiUrl}/userinfo`,
@@ -61,10 +62,10 @@ app.use(session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/auth/provider', passport.authenticate('provider'));
-app.get('/auth/provider/callback',
-  passport.authenticate('provider', { successRedirect: '/',
-    failureRedirect: '/login' }));
+app.get('/auth/', passport.authenticate('openid-connect'));
+app.get('/auth/callback',
+  passport.authenticate('openid-connect', { successRedirect: '/',
+    failureRedirect: '/' }));
 
 app.get('/', (req, res) => {
   console.log(req.user);
