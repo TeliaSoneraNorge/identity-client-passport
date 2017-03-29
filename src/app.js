@@ -15,7 +15,7 @@ const idpApiUrl = `${issuer}/protocol/openid-connect`;
 const clientID = 'AddClientIDHere';
 const clientSecret = 'AddClientSecretHere';
 const callbackURL = 'http://localhost:3000/auth/callback';  // Change this in production
-const scope = ['oidc'];
+const scope = ['openid'];
 
 if (clientID === 'AddClientIDHere' || clientSecret === 'AddClientSecretHere') {
   console.error(`
