@@ -14,7 +14,7 @@ const issuer = 'https://login.telia.io/realms/telia';
 const idpApiUrl = `${issuer}/protocol/openid-connect`;
 const clientID = 'AddClientIDHere';
 const clientSecret = 'AddClientSecretHere';
-const callbackURL = 'http://localhost:3000/auth/callback';  // Change this in production
+const callbackURL = 'http://localhost:3000/auth/callback';  // Should match registered redirectURL and be changed in production
 const scope = ['openid'];
 
 if (clientID === 'AddClientIDHere' || clientSecret === 'AddClientSecretHere') {
